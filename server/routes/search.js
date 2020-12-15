@@ -3,12 +3,14 @@ const router = express.Router();
 const async = require('async')
 const House = require('../models/house')
 const { body, validationResult } = require('express-validator')
+const zipcodes = require('zipcodes')
 
 /* POST search. */
 router.post('/', [
   
   // Validate and sanitise fields
-  body('zipcode', 'Must include zipcode').trim().escape(),
+  body('zipcode').trim().escape(),
+  body('zipcodeRadius').trim().escape(),
   body('bedsMin').trim().escape(),
   body('bedsMax').trim().escape(),
   body('bathsMin').trim().escape(),
@@ -18,6 +20,7 @@ router.post('/', [
   body('priceMin').trim().escape(),
   body('priceMax').trim().escape(),
   body('address').trim().escape(),
+  body('priceSort').trim().escape(),
 
   async (req, res, next) => {
 
@@ -25,11 +28,21 @@ router.post('/', [
     const errors = validationResult(req);
     
     if (errors.isEmpty()) {
-
+      
+      
       const searchQuery = {}
-  
       // Add the following paramaters to search query if input by user
-      if (Number(req.body.zipcode) !== 0) searchQuery.zipcode = req.body.zipcode
+
+      if (Number(req.body.zipcode) !== 0) {
+        searchQuery.zipcode = req.body.zipcode
+        
+        // Generate zipcodes within an x mile radius
+        const zipcodesWithinRadius = zipcodes.radius(req.body.zipcode, req.body.zipcodeRadius) 
+
+        if (zipcodesWithinRadius.length > 0) {
+          searchQuery.zipcode = {$in: zipcodesWithinRadius}
+        }
+      } 
 
       if (Number(req.body.bedsMin) !== 0 && Number(req.body.bedsMax) !== 0) {
         searchQuery.beds = {"$gte": req.body.bedsMin, "$lte": req.body.bedsMax}
@@ -62,8 +75,7 @@ router.post('/', [
       if (req.body.address !== "") searchQuery.address = {"$regex":req.body.address, "$options": "i"} 
       
       // Search MongoDB with user inputted query
-      const searchOutput = await House.find(searchQuery)
-      console.log(searchOutput)
+      const searchOutput = await House.find(searchQuery).sort([['price', req.body.priceSort]])
       res.json(searchOutput)
     }
   }

@@ -4,7 +4,7 @@ import postFetch from './components/postFetch'
 function App() {
 
   const testSubmit = () => {
-    const data = {zipcode: 0, beds: 0, address: "", bathsMin: 2, bathsMax: 5}
+    const data = {zipcode: 94131, zipcodeRadius: 1}
 
     // data must be in object format
     postFetch(data)
