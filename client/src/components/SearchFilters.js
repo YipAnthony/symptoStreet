@@ -13,14 +13,7 @@ export default function SearchFilters(props) {
         const priceRegex = /^[$0-9\s][0-9,.\s]*$/
         const isValidNumber = priceRegex.test(input)
 
-        if (e.target.id === "bathsInput" || e.target.id === "bedsInput") {
-            setSearchFilters(prev => {
-                return {
-                    ...prev,
-                    [e.target.id]: input
-                }
-            })
-        } else if (isValidNumber || input === "") {
+        if (isValidNumber || input === "" || e.target.id === "bathsInput" || e.target.id === "bedsInput") {
             setSearchFilters(prev => {
                 return {
                     ...prev,
@@ -32,9 +25,6 @@ export default function SearchFilters(props) {
     }
 
     // zipcoderadius
-    // beds
-    // baths
-    // sqft
 
     return (
         <div id="searchFilterContainer" className="card">

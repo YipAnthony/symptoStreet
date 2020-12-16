@@ -44,17 +44,17 @@ router.post('/', [
 
       if (Number(req.body.bedsInput) !== 0) {
         if (Number(req.body.bedsInput[1]) === 0) {
-          searchQuery.beds = {"$gte": req.body.bedsMin[0]}
+          searchQuery.beds = {"$gte": req.body.bedsInput[0]}
         } else {
-          searchQuery.beds = {"$gte": req.body.bedsMin[0], "$lte": req.body.bedsInput[1]}
+          searchQuery.beds = {"$gte": req.body.bedsInput[0], "$lte": req.body.bedsInput[1]}
         }
       }
 
       if (Number(req.body.bathsInput) !== 0) {
-        if (Number(req.body.bedsInput[1] === 0)) {
-          searchQuery.baths = {"$gte": req.body.bathsMin[0]}
+        if (Number(req.body.bathsInput[1] === 0)) {
+          searchQuery.baths = {"$gte": req.body.bathsInput[0]}
         } else {
-          searchQuery.baths = {"$gte": req.body.bathsMin[0], "$lte": req.body.bathsMax[1]}
+          searchQuery.baths = {"$gte": req.body.bathsInput[0], "$lte": req.body.bathsInput[1]}
         }
       }
       

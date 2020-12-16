@@ -10,16 +10,33 @@ export default function SearchBar(props) {
 
     return (
         <div>
-            <form className="form-inline">
-                <input 
-                    className="form-control mr-sm-2" 
-                    type="search"
-                    value={searchInput}
-                    onChange={handleSearchInput}
-                    placeholder="Search by zipcode or address"
-                />
+            <form className="d-flex justify-content-around">
+                <div className="d-flex">
+                    <input 
+                        id="addressSearch"
+                        className="form-control mr-sm-2" 
+                        type="search"
+                        value={searchInput}
+                        onChange={handleSearchInput}
+                        placeholder="Search by address"
+                    />
+                    <button className="btn btn-primary">Search</button>
+                </div>
+                <div className="d-flex">
+                    <input 
+                        id="zipcodeSearch"
+                        className="form-control mr-sm-2" 
+                        type="search"
+                        value={searchInput}
+                        onChange={handleSearchInput}
+                        placeholder="Search by zipcode"
+                    />
+                    <button className="btn btn-primary">Search</button>
+
+                </div>
 
             </form>
+            
         </div>
     )
 }
