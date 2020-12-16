@@ -9,7 +9,7 @@ export default function SearchFilters(props) {
     const handleChange = (e) => {
         const input = e.target.value
 
-        // price input must be type Number
+        // price & sqft input must be type Number
         const priceRegex = /^[$0-9\s][0-9,.\s]*$/
         const isValidNumber = priceRegex.test(input)
 
@@ -141,6 +141,19 @@ export default function SearchFilters(props) {
                 </div>
             </div>
             <hr/>
+
+            <p id="zipcodeFilter">
+                <button 
+                    className="btn btn-light" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#collapseZipcodeFilter" 
+                    aria-expanded="false" 
+                    aria-controls="collapseZipcodeFilter"
+                >
+                    Zipcode
+                </button>
+            </p>
         </div>
     )
 }

@@ -13,7 +13,13 @@ function App() {
     .then(data => console.log(data))
   }
 
-  const [ searchInput, setSearchInput ] = useState("")
+  const [ searchInput, setSearchInput ] = useState(
+    {
+      address: "",
+      zipcode: "",
+      zipcodeRadius: "3",
+    }
+  )
   const [ searchFilters, setSearchFilters ] = useState(
     {
       priceInputMin: "",
@@ -22,8 +28,6 @@ function App() {
       sqftInputMax: "",
       bedsInput: "",
       bathsInput: "",
-      zipcode: "",
-      zipcodeRadius: "",
     })
 
   return (
