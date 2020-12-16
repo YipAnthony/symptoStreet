@@ -1,3 +1,7 @@
+:root {
+  --symptoPrimaryBlue: #213c7f;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -13,12 +17,18 @@ code {
 }
 
 hr {
-  margin: 0 !important
+  margin: 0 !important;
+  color: #eeeeef;
+  height: 3px !important;
 }
 
-#searchFilterContainer {
-  max-width: 300px;
+#mainContent {
+  margin: 10px;
 }
+
+/* #searchFilterContainer {
+  max-width: 300px;
+} */
 
 #filterContainerTitle {
   font-size: 20px;
@@ -37,4 +47,99 @@ hr {
 
 .zipcodeSlideContainer {
   margin: 5px 1px;
+}
+
+#searchBox {
+  width: 400px;
+}
+
+
+#logoBar {
+  margin: 5px;
+  height: 50px;
+}
+
+#combinedLogo {
+  height: 34px;
+}
+
+#streetText {
+  font-weight: bold;
+  font-size: 30px;
+  color: var(--symptoPrimaryBlue)
+}
+
+/* Results formatting */
+.singleResult {
+  margin: 10px;
+  border-color: #eeeeef;
+  width: 350px;
+  height: 360px;
+  border-radius: 10px;
+}
+
+.singleResult:hover {
+  cursor: pointer;
+  border-color: #cfcfcf;
+  box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.1),
+    0px 9px 12px 1px rgba(0, 0, 0, 0.07),
+    0px 3px 16px 2px rgba(0, 0, 0, 0.06);
+  transform: scale(1.01);
+  transition-duration: .1s;
+}
+
+.resultImageContainer {
+  height: 212px;
+  border-bottom: 1px rgba(0, 0, 0, 0.185) solid;
+  display: flex;
+}
+
+.houseIcon {
+  margin: auto;
+  color: rgb(117, 114, 128);
+  opacity: .5;
+}
+
+.bedsBathSqftText {
+  margin-right: 15px;
+}
+
+.resultContent {
+  padding: 10px;
+}
+
+.resultAddress {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+
+#resultPageNavIcons {
+  display: flex;
+  justify-content: center;
+}
+
+#searchResultsContainer {
+  width: 100%;
+  padding: 10px;
+}
+
+
+
+.arrowIcon {
+  color: rgb(117, 114, 128);
+  opacity: .8;
+  transition-duration: .1s;
+}
+
+.arrowIcon:hover {
+  cursor: pointer;
+  color: black;
+  opacity: 1;
+  transform: scale(1.1);
+  transition-duration: .1s;
+}
+
+.searchResultIndex {
+  font-size: 24px;
 }

@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
-import postFetch from './functions/postFetch'
+
+import LogoBar from './components/LogoBar'
 import SearchBar from './components/SearchBar'
 import SearchFilters from './components/SearchFilters'
 import SearchResults from './components/SearchResults'
+
+import postFetch from './functions/postFetch'
 
 function App() {
   
@@ -41,12 +44,20 @@ function App() {
       
   return (
     <div className="App">
-      <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
-      <SearchFilters searchFilters={searchFilters} setSearchFilters={setSearchFilters} />
-      <button className="btn btn-primary" onClick={handleSearch}>Test Submit</button>
-      <section id="searchResultsContainer">
-        <SearchResults searchResults={searchResults} setSearchResults={setSearchResults} />
-      </section>
+      <div><LogoBar /></div>
+      <hr/>
+      <div id="mainContent" className="d-flex">
+        <section >
+          <div id="searchBox" className="card">
+            <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+            <SearchFilters searchFilters={searchFilters} setSearchFilters={setSearchFilters} />
+            <button className="btn btn-primary" onClick={handleSearch}>Test Submit</button>
+          </div>
+        </section>
+        <section id="searchResultsContainer">
+          <SearchResults searchResults={searchResults} setSearchResults={setSearchResults} />
+        </section>
+      </div>
     </div>
   );
  }

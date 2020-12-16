@@ -37,7 +37,7 @@ export default function SearchBar(props) {
     }, [zipcode])
 
     return (
-        <div id="searchFilterContainer" className="card">
+        <div id="searchFilterContainer" className="">
             <h3>Search By: </h3>
             <form autoComplete="off">
                 <div className="d-flex">
@@ -49,7 +49,7 @@ export default function SearchBar(props) {
                         onChange={handleSearchInput}
                         placeholder="Search by address"
                     />
-                    <button className="btn btn-primary">Search</button>
+                    {/* <button className="btn btn-primary">Search</button> */}
                 </div>
                 or
                 <div className="d-flex">
@@ -61,7 +61,7 @@ export default function SearchBar(props) {
                         value={zipcode}
                         onChange={handleSearchInput}
                     />
-                    <button className="btn btn-primary">Search</button>
+                    {/* <button className="btn btn-primary">Search</button> */}
 
                 </div>
                     <div className="zipcodeSlideContainer">

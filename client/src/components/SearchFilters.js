@@ -27,7 +27,7 @@ export default function SearchFilters(props) {
     // zipcoderadius
 
     return (
-        <form id="searchFilterContainer" className="card" autoComplete="off">
+        <form id="searchFilterContainer" className="" autoComplete="off">
             
             <h3 id="filterContainerTitle">Filter by:</h3>
             <hr/>

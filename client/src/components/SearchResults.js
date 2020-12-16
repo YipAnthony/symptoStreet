@@ -29,7 +29,7 @@ export default function SearchResults(props) {
     let resultsOutput = []
     for (let i = resultGroup()[0] - 1; i < resultGroup()[1]; i++) {
         resultsOutput.push(
-            <SingleResult result={searchResults[i]} index={i}/>
+            <SingleResult result={searchResults[i]} index={i} key={searchResults[i]._id}/>
         )
     }
 
@@ -58,13 +58,6 @@ export default function SearchResults(props) {
 
     return (
         <div>
-            {resultGrouping.groups > 1 ? 
-                <>
-                    <span id="leftArrow" onClick={handleLeftArrowClick}>{leftArrow}</span>
-                    <span id="rightArrow" onClick={handleRightArrowClick}>{rightArrow}</span>
-                </>:
-                null            
-            }
             <h3 id="searchResultsTitle">
                 {searchResults.length === 0 ? 
                     "No results...":
@@ -72,6 +65,13 @@ export default function SearchResults(props) {
                 }
             </h3>
             {resultsOutput}
+            {resultGrouping.groups > 1 ? 
+                <span id="resultPageNavIcons">
+                    <span id="leftArrow" className="arrowIcon" onClick={handleLeftArrowClick}>{leftArrow}</span>
+                    <span id="rightArrow" className="arrowIcon" onClick={handleRightArrowClick}>{rightArrow}</span>
+                </span>:
+                null            
+            }
         </div>
     )
 }
