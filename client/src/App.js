@@ -6,8 +6,8 @@ import SearchFilters from './components/SearchFilters'
 function App() {
 
   const testSubmit = () => {
-    const data = {zipcode: 94131, zipcodeRadius: 1, bedsInput: 40}
-
+    const data = {...searchInput, ...searchFilters}
+    console.log (data)
     // data must be in object format
     postFetch(data)
     .then(data => console.log(data))

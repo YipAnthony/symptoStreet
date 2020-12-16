@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function SearchBar(props) {
     const { searchInput, setSearchInput } = props
@@ -15,6 +15,8 @@ export default function SearchBar(props) {
         if (e.target.id === "zipcode" && !isZipcodeANumber) {
             return
         }
+
+        // Set address/zipcode state
         setSearchInput(prev => {
             return {
                 ...prev,
@@ -23,9 +25,21 @@ export default function SearchBar(props) {
         })
     }
 
+    // Toggle disable attribute for zipcode radius slider
+    useEffect(() => {
+        const zipcodeRadiusElement = document.getElementById('zipcodeRadius')
+        
+        if (zipcode !== "") {
+            zipcodeRadiusElement.removeAttribute("disabled")
+        } else {
+            zipcodeRadiusElement.setAttribute("disabled", "")
+        }
+    }, [zipcode])
+
     return (
-        <div>
-            <form className="d-flex justify-content-around">
+        <div id="searchFilterContainer" className="card">
+            <h3>Search By: </h3>
+            <form className="">
                 <div className="d-flex">
                     <input 
                         id="address"
@@ -37,22 +51,32 @@ export default function SearchBar(props) {
                     />
                     <button className="btn btn-primary">Search</button>
                 </div>
+                or
                 <div className="d-flex">
                     <input 
                         id="zipcode"
                         className="form-control mr-sm-2" 
                         type="search"
+                        placeholder="Search by zipcode"
                         value={zipcode}
                         onChange={handleSearchInput}
-                        placeholder="Search by zipcode"
                     />
-                    <div className="zipcodeSlideContainer">
-                        <label>Search Radius: {zipcodeRadius}mi</label>
-                        <input type="range" min="1" max="5" value={zipcodeRadius} onChange={handleSearchInput} className="slider" id="zipcodeRadius"/>
-                    </div>
                     <button className="btn btn-primary">Search</button>
 
                 </div>
+                    <div className="zipcodeSlideContainer">
+                        <label>Search Radius: {zipcodeRadius}mi</label>
+                        <input 
+                            id="zipcodeRadius"
+                            className="slider" 
+                            type="range" 
+                            min="1" 
+                            max="5" 
+                            disabled 
+                            value={zipcodeRadius} 
+                            onChange={handleSearchInput} 
+                        />
+                    </div>
 
             </form>
             

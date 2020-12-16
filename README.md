@@ -19,3 +19,4 @@ To-do
 
 [ ] replace React icon w/ Sympto logo
 [ ] update backend address search: make everything lowercase first
+[ ] verify min less than max

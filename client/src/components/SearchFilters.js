@@ -141,19 +141,6 @@ export default function SearchFilters(props) {
                 </div>
             </div>
             <hr/>
-
-            <p id="zipcodeFilter">
-                <button 
-                    className="btn btn-light" 
-                    type="button" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target="#collapseZipcodeFilter" 
-                    aria-expanded="false" 
-                    aria-controls="collapseZipcodeFilter"
-                >
-                    Zipcode
-                </button>
-            </p>
         </div>
     )
 }
