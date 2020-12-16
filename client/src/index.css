@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+hr {
+  margin: 0 !important
+}
+
+#searchFilterContainer {
+  max-width: 300px;
+  height: 600px;
+}
+
+#filterContainerTitle {
+  font-size: 20px;
+  padding: 5px;
+  margin: 0;
+}
+
+.priceInput, .sqftInput {
+  width: 45%;
+  margin-bottom: 5px;
+}
+
+.bedbathInput {
+  margin-bottom: 5px;
+}

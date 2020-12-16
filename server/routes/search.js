@@ -11,10 +11,8 @@ router.post('/', [
   // Validate and sanitise fields
   body('zipcode').trim().escape(),
   body('zipcodeRadius').trim().escape(),
-  body('bedsMin').trim().escape(),
-  body('bedsMax').trim().escape(),
-  body('bathsMin').trim().escape(),
-  body('bathsMax').trim().escape(),
+  body('bedsInput').trim().escape(),
+  body('bathsInput').trim().escape(),
   body('sqftMin').trim().escape(),
   body('sqftMax').trim().escape(),
   body('priceMin').trim().escape(),
@@ -44,18 +42,20 @@ router.post('/', [
         }
       } 
 
-      if (Number(req.body.bedsMin) !== 0 && Number(req.body.bedsMax) !== 0) {
-        searchQuery.beds = {"$gte": req.body.bedsMin, "$lte": req.body.bedsMax}
-      } else {
-        if (Number(req.body.bedsMin) !== 0) searchQuery.beds = {"$gte": req.body.bedsMin}
-        if (Number(req.body.bedsMax) !== 0) searchQuery.beds = {"$lte": req.body.bedsMax}
+      if (Number(req.body.bedsInput) !== 0) {
+        if (Number(req.body.bedsInput[1]) === 0) {
+          searchQuery.beds = {"$gte": req.body.bedsMin[0]}
+        } else {
+          searchQuery.beds = {"$gte": req.body.bedsMin[0], "$lte": req.body.bedsInput[1]}
+        }
       }
 
-      if (Number(req.body.bathsMin) !== 0 && Number(req.body.bathsMax) !== 0) {
-        searchQuery.baths = {"$gte": req.body.bathsMin, "$lte": req.body.bathsMax}
-      } else {
-        if (Number(req.body.bathsMin) !== 0) searchQuery.baths = {"$gte": req.body.bathsMin}
-        if (Number(req.body.bathsMax) !== 0) searchQuery.baths = {"$lte": req.body.bathsMax}
+      if (Number(req.body.bathsInput) !== 0) {
+        if (Number(req.body.bedsInput[1] === 0)) {
+          searchQuery.baths = {"$gte": req.body.bathsMin[0]}
+        } else {
+          searchQuery.baths = {"$gte": req.body.bathsMin[0], "$lte": req.body.bathsMax[1]}
+        }
       }
       
       if (Number(req.body.sqftMin) !== 0 && Number(req.body.sqftMax) !== 0) {
