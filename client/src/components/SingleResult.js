@@ -8,8 +8,12 @@ export default function SingleResult(props) {
 
     const { result, index } = props
 
+    const openURL = () => {
+        window.open(result.url, '_blank')
+    } 
+
     return (
-        <div className="card singleResult">
+        <div className="card singleResult" onClick={openURL}>
             <div className="resultImageContainer">
                 <span className="houseIcon">{houseIcon}</span>
             </div>

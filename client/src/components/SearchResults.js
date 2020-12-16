@@ -33,7 +33,14 @@ export default function SearchResults(props) {
         )
     }
 
+    const scrollToTop = () => {
+        document.getElementById('logoBar').scrollIntoView({behavior: 'smooth'})
+    }
+
     const handleLeftArrowClick = (e) => {
+        
+        scrollToTop()
+        
         if (resultGrouping.currentGroup === 1) return
 
         setResultGrouping(prev => {
@@ -45,6 +52,8 @@ export default function SearchResults(props) {
     }
 
     const handleRightArrowClick = () => {
+        scrollToTop()
+        
         if (resultGrouping.currentGroup === resultGrouping.groups) return
         
         setResultGrouping(prev => {
@@ -64,7 +73,9 @@ export default function SearchResults(props) {
                     "Showing results " + resultGroup()[0] + "-" + resultGroup()[1] + " of " + searchResults.length
                 }
             </h3>
-            {resultsOutput}
+            <div className="d-flex flex-wrap">
+                {resultsOutput}
+            </div>
             {resultGrouping.groups > 1 ? 
                 <span id="resultPageNavIcons">
                     <span id="leftArrow" className="arrowIcon" onClick={handleLeftArrowClick}>{leftArrow}</span>
