@@ -28,7 +28,7 @@ export default function SearchBar(props) {
     // Toggle disable attribute for zipcode radius slider
     useEffect(() => {
         const zipcodeRadiusElement = document.getElementById('zipcodeRadius')
-        
+
         if (zipcode !== "") {
             zipcodeRadiusElement.removeAttribute("disabled")
         } else {
@@ -39,7 +39,7 @@ export default function SearchBar(props) {
     return (
         <div id="searchFilterContainer" className="card">
             <h3>Search By: </h3>
-            <form className="">
+            <form autoComplete="off">
                 <div className="d-flex">
                     <input 
                         id="address"
@@ -77,7 +77,6 @@ export default function SearchBar(props) {
                             onChange={handleSearchInput} 
                         />
                     </div>
-
             </form>
             
         </div>

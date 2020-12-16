@@ -27,14 +27,14 @@ export default function SearchFilters(props) {
     // zipcoderadius
 
     return (
-        <div id="searchFilterContainer" className="card">
+        <form id="searchFilterContainer" className="card" autoComplete="off">
             
             <h3 id="filterContainerTitle">Filter by:</h3>
             <hr/>
 
             <p id="priceFilter">
                 <button 
-                    className="btn btn-light" 
+                    className="btn btn-light shadow-none" 
                     type="button" 
                     data-bs-toggle="collapse" 
                     data-bs-target="#collapsePriceFilter" 
@@ -66,7 +66,7 @@ export default function SearchFilters(props) {
 
             <p id="sqftFilter">
                 <button 
-                    className="btn btn-light" 
+                    className="btn btn-light shadow-none" 
                     type="button" 
                     data-bs-toggle="collapse" 
                     data-bs-target="#collapseSqftFilter" 
@@ -96,7 +96,7 @@ export default function SearchFilters(props) {
 
             <p id="bedsBathFilter">
                 <button 
-                    className="btn btn-light" 
+                    className="btn btn-light shadow-none" 
                     type="button" 
                     data-bs-toggle="collapse" 
                     data-bs-target="#collapseBedsBathFilter" 
@@ -141,6 +141,6 @@ export default function SearchFilters(props) {
                 </div>
             </div>
             <hr/>
-        </div>
+        </form>
     )
 }
