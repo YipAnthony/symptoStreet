@@ -6,8 +6,8 @@ export default function SingleResult(props) {
 
     return (
         <div className="card" key={result._id}>
-            <h3>{index + 1}.</h3>
-            {result.address}
+            <h3>{index + 1}. {result.address}</h3>
+            {result.price}
         </div>
     )
 }

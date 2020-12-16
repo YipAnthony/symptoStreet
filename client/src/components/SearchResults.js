@@ -33,45 +33,45 @@ export default function SearchResults(props) {
         )
     }
 
-    const handleArrowClick = (e) => {
-        if (e.target.id === "leftArrow") {
-            if (resultGrouping.currentGroup === 1) {
-                return
-            } else {
-                setResultGrouping(prev => {
-                    return {
-                        ...prev,
-                        currentGroup: prev.currentGroup - 1
-                    }
-                })
+    const handleLeftArrowClick = (e) => {
+        if (resultGrouping.currentGroup === 1) return
+
+        setResultGrouping(prev => {
+            return {
+                ...prev,
+                currentGroup: prev.currentGroup - 1
             }
-        } else {
-            if (resultGrouping.currentGroup === resultGrouping.groups) {
-                return
-            } else {
-                setResultGrouping(prev => {
-                    return {
-                        ...prev,
-                        currentGroup: prev.currentGroup + 1
-                    }
-                })
-            }
-        }
+        })
     }
+
+    const handleRightArrowClick = () => {
+        if (resultGrouping.currentGroup === resultGrouping.groups) return
+        
+        setResultGrouping(prev => {
+            return {
+                ...prev,
+                currentGroup: prev.currentGroup + 1
+            }
+        })
+    }
+        
 
     return (
         <div>
-                <span id="leftArrow" onClick={handleArrowClick}>{leftArrow}</span>
-                <span id="rightArrow" onClick={handleArrowClick}>{rightArrow}</span>
+            {resultGrouping.groups > 1 ? 
+                <>
+                    <span id="leftArrow" onClick={handleLeftArrowClick}>{leftArrow}</span>
+                    <span id="rightArrow" onClick={handleRightArrowClick}>{rightArrow}</span>
+                </>:
+                null            
+            }
             <h3 id="searchResultsTitle">
                 {searchResults.length === 0 ? 
                     "No results...":
                     "Showing results " + resultGroup()[0] + "-" + resultGroup()[1] + " of " + searchResults.length
                 }
             </h3>
-            
-            { resultsOutput }
-
+            {resultsOutput}
         </div>
     )
 }
