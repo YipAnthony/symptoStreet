@@ -18,6 +18,8 @@ function onPlaceChanged() {
   if (!place.geometry) {
     document.getElementById('googleAddress').placeholder = 'Search an address'
   } else {
-    console.log(place.geometry.location.lat(), place.geometry.location.lng() )
+    
+    document.getElementById('googleAddress').setAttribute('latitude', place.geometry.location.lat()) 
+    document.getElementById('googleAddress').setAttribute('longitude', place.geometry.location.lng())  
   }
 }
