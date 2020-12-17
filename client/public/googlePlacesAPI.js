@@ -21,5 +21,6 @@ function onPlaceChanged() {
     
     document.getElementById('googleAddress').setAttribute('latitude', place.geometry.location.lat()) 
     document.getElementById('googleAddress').setAttribute('longitude', place.geometry.location.lng())  
+    document.getElementById('googleAddress').setAttribute('resultName', place.name)  
   }
 }

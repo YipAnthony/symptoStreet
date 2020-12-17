@@ -6,6 +6,7 @@ import SearchFilters from './components/SearchFilters'
 import SearchResults from './components/SearchResults'
 
 import postFetch from './functions/postFetch'
+import getZipcodeFromLatLong from './functions/reverseGeocode'
 
 function App() {
  
@@ -31,13 +32,27 @@ function App() {
   
   const [ searchResults, setSearchResults ] = useState([])
   const [ hasResults, setHasResults ] = useState(true)
-  
+
+  const updateAddressStateWithSelection = () => {
+    const resultName = document.getElementById('googleAddress').getAttribute('resultName')
+    setSearchInput(prev => {
+      return {
+        ...prev,
+        googleAddress: resultName
+      }
+    })
+  }
+
   const submitSearch = async () => {
+    updateAddressStateWithSelection();
     const data = {...searchInput, ...searchFilters}
+    delete data.googleAddress
+    data.zipcode = getZipcodeFromLatLong()
     return await postFetch(data)
   }
 
   const handleSearch = async () => {
+
     const fetchResults = await submitSearch()
     
     // Update searchResults state
