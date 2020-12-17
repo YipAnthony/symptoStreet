@@ -36,7 +36,13 @@ code {
 
 #mainSearchText {
   display: inline-block;
+  width: 100%;
 }
+#selectAddressorZipcode {
+  margin-left: 5px;
+  width: 50%;
+}
+
 
 .form-check-input:focus {
   border-color: none;

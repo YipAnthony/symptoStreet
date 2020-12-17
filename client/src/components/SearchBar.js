@@ -75,11 +75,10 @@ export default function SearchBar(props) {
     return (
         <div >
             <h3 id="mainSearchText">Search By:
-                {isSearchByAddress ? " Address": " Zipcode"}
-                <div className="form-check form-switch  d-inline-block shadow-none">
-                    <input className="form-check-input" checked={isSearchByAddress} onChange={handleAddressZipcodeToggle} type="checkbox" id="flexSwitchCheckDefault" />
-                    <label className="form-check-label"></label>
-                </div>
+                <select id="selectAddressorZipcode" className="form-select form-select-lg d-inline-block shadow-none" value={isSearchByAddress? "Address": "Zipcode"} onChange={handleAddressZipcodeToggle}>
+                    <option value="Address">Address</option>
+                    <option value="Zipcode">Zipcode</option>
+                </select>
             </h3>
 
             <form id="searchAddressZipcodeContainer" autoComplete="off">
