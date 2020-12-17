@@ -7,6 +7,7 @@ export default function SearchResults(props) {
     const { searchResults, setSearchResults } = props
 
     const [ resultGrouping, setResultGrouping ] = useState({groups: Number, currentGroup: 1})
+    const [ resultsOutput, setResultsOutput ] = useState([])
     
     // Determine number of result groups
     useEffect(() => {
@@ -18,7 +19,6 @@ export default function SearchResults(props) {
 
     const resultGroup = () => {
         const { currentGroup, groups} = resultGrouping
-
         if (currentGroup < groups) {
             return [currentGroup*10-9, currentGroup*10]
         } else {
@@ -26,23 +26,24 @@ export default function SearchResults(props) {
         }
     }
 
-    let resultsOutput = []
-    for (let i = resultGroup()[0] - 1; i < resultGroup()[1]; i++) {
-        resultsOutput.push(
-            <SingleResult result={searchResults[i]} index={i} key={searchResults[i]._id}/>
-        )
-    }
+    useEffect(() => {
+        let output = []
+        for (let i = resultGroup()[0] - 1; i < resultGroup()[1]; i++) {
+            output.push(
+                
+                <SingleResult result={searchResults[i]} index={i} key={searchResults[i]._id}/>
+            )
+        }
+        setResultsOutput(output)
+    }, [resultGrouping])
 
     const scrollToTop = () => {
         document.getElementById('logoBar').scrollIntoView({behavior: 'smooth'})
     }
 
     const handleLeftArrowClick = (e) => {
-        
         scrollToTop()
-        
         if (resultGrouping.currentGroup === 1) return
-
         setResultGrouping(prev => {
             return {
                 ...prev,
