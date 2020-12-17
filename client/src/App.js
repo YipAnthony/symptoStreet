@@ -8,10 +8,11 @@ import SearchResults from './components/SearchResults'
 import postFetch from './functions/postFetch'
 
 function App() {
-  
+ 
   const [ searchInput, setSearchInput ] = useState(
     {
       address: "",
+      googleAddress: "",
       zipcode: "",
       zipcodeRadius: "3",
     }
@@ -57,7 +58,7 @@ function App() {
           <div id="searchBox" className="card">
             <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
             <SearchFilters searchFilters={searchFilters} setSearchFilters={setSearchFilters} />
-            <button className="btn btn-primary" onClick={handleSearch}>Test Submit</button>
+            <button className="btn btn-primary" onClick={handleSearch}>Search</button>
           </div>
         </section>
         <section id="searchResultsContainer">

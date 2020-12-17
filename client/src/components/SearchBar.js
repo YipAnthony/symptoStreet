@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function SearchBar(props) {
     const { searchInput, setSearchInput } = props
-    const { address, zipcode, zipcodeRadius } = searchInput
+    const { address, googleAddress, zipcode, zipcodeRadius } = searchInput
 
+    const [ isGoogleAPIOn, setIsGoogleAPIOn ] = useState(true)
 
     const handleSearchInput = (e) => {
         const userInput = e.target.value
@@ -25,6 +26,17 @@ export default function SearchBar(props) {
         })
     }
 
+    const handleGoogleAPIToggle = () => {
+        setIsGoogleAPIOn(prev => !prev)
+        setSearchInput(prev => {
+            return {
+                ...prev,
+                address: "",
+                googleAddress: ""
+            }
+        })
+    }
+
     // Toggle disable attribute for zipcode radius slider
     useEffect(() => {
         const zipcodeRadiusElement = document.getElementById('zipcodeRadius')
@@ -40,17 +52,38 @@ export default function SearchBar(props) {
         <div id="searchFilterContainer" className="">
             <h3>Search By: </h3>
             <form autoComplete="off">
-                <div className="d-flex">
-                    <input 
-                        id="address"
-                        className="form-control mr-sm-2" 
-                        type="search"
-                        value={address}
-                        onChange={handleSearchInput}
-                        placeholder="Search by address"
-                    />
-                    {/* <button className="btn btn-primary">Search</button> */}
+                <div id="addressSearchContainer">
+                    <div className="d-flex">
+                        <input 
+                            id="googleAddress"
+                            className="form-control mr-sm-2" 
+                            type="search"
+                            hidden={!isGoogleAPIOn}
+                            value={googleAddress}
+                            onChange={handleSearchInput}
+                            placeholder="Search by address"
+                        />
+                    </div>
+                    {isGoogleAPIOn ? null:
+                    <div className="d-flex">
+                        <input 
+                            id="address"
+                            className="form-control mr-sm-2" 
+                            type="search"
+                            value={address}
+                            onChange={handleSearchInput}
+                            placeholder="Search by address"
+                        />
+                    </div>
+                }
+
                 </div>
+                {/* Toggle Google Search API */}
+                <div className="form-check form-switch mt-2">
+                    <input className="form-check-input" checked={isGoogleAPIOn} onChange={handleGoogleAPIToggle} type="checkbox" id="flexSwitchCheckDefault" />
+                    <label className="form-check-label">{isGoogleAPIOn ? "Google Search API On": "Google Search API Off"}</label>
+                </div>
+
                 <span className="d-flex justify-content-center">or</span>
                 <div className="d-flex">
                     <input 
@@ -61,7 +94,6 @@ export default function SearchBar(props) {
                         value={zipcode}
                         onChange={handleSearchInput}
                     />
-                    {/* <button className="btn btn-primary">Search</button> */}
 
                 </div>
                     <div className="zipcodeSlideContainer">
