@@ -29,6 +29,7 @@ function App() {
   )
   
   const [ searchResults, setSearchResults ] = useState([])
+  const [ hasResults, setHasResults ] = useState(true)
   
   const submitSearch = async () => {
     const data = {...searchInput, ...searchFilters}
@@ -40,6 +41,11 @@ function App() {
     
     // Update searchResults state
     setSearchResults(fetchResults)
+    if (fetchResults.length === 0) {
+      setHasResults(false)
+    } else {
+      setHasResults(true)
+    }
   }
       
   return (
@@ -55,7 +61,7 @@ function App() {
           </div>
         </section>
         <section id="searchResultsContainer">
-          <SearchResults searchResults={searchResults} setSearchResults={setSearchResults} />
+          <SearchResults searchResults={searchResults} setSearchResults={setSearchResults} hasResults={hasResults} />
         </section>
       </div>
     </div>

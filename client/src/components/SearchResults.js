@@ -4,7 +4,7 @@ import { leftArrow, rightArrow } from '../icons/icons'
 
 export default function SearchResults(props) {
 
-    const { searchResults, setSearchResults } = props
+    const { searchResults, setSearchResults, hasResults } = props
 
     const [ resultGrouping, setResultGrouping ] = useState({groups: Number, currentGroup: 1})
     const [ resultsOutput, setResultsOutput ] = useState([])
@@ -70,8 +70,9 @@ export default function SearchResults(props) {
     return (
         <div>
             <h3 id="searchResultsTitle">
+                {!hasResults ? "No results, try broadening your search": null}
                 {searchResults.length === 0 ? 
-                    "No results...":
+                    null:
                     "Showing results " + resultGroup()[0] + "-" + resultGroup()[1] + " of " + searchResults.length
                 }
             </h3>
