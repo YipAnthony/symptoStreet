@@ -16,6 +16,9 @@ code {
     monospace;
 }
 
+.untargetable {
+  pointer-events: none;
+}
 #mainContent {
   margin: 10px;
 }
@@ -38,6 +41,7 @@ hr {
 #priceFilter, #sqftFilter, #bedsBathFilter {
   margin-bottom: 0;
 }
+
 
 #collapsePriceFilter, #collapseSqftFilter {
   padding-left: 10px;

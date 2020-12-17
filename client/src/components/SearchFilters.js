@@ -59,7 +59,7 @@ export default function SearchFilters(props) {
                         onClick={handleFilterToggle}
                         >
                         {filterToggles.price ? upArrow: downArrow}
-                        <span className="toggleText">Price</span>
+                        <span className="toggleText untargetable">Price</span>
                     </button>
                 </span>
             </p>
@@ -95,7 +95,7 @@ export default function SearchFilters(props) {
                     onClick={handleFilterToggle}
                 >
                     {filterToggles.sqft ? upArrow: downArrow}
-                    <span className="toggleText">Square Feet</span>
+                    <span className="toggleText untargetable">Square Feet</span>
                 </button>
             </p>
             <div className="collapse" id="collapseSqftFilter">
@@ -129,7 +129,7 @@ export default function SearchFilters(props) {
                     onClick={handleFilterToggle}
                 >
                     {filterToggles.bedBath ? upArrow: downArrow}
-                    <span className="toggleText">Bed & Bath</span>
+                    <span className="toggleText untargetable" >Bed & Bath</span>
                 </button>
             </p>
             <div className="collapse" id="collapseBedsBathFilter">

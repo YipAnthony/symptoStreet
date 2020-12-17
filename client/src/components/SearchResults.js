@@ -12,9 +12,7 @@ export default function SearchResults(props) {
     // Determine number of result groups
     useEffect(() => {
         const numberOfGroups = Math.round(searchResults.length/10)
-        setResultGrouping(prev => { 
-            return {...prev, groups: numberOfGroups}
-        })
+        setResultGrouping({groups: numberOfGroups, currentGroup: 1})
     }, [searchResults])
 
     const resultGroup = () => {
@@ -30,7 +28,6 @@ export default function SearchResults(props) {
         let output = []
         for (let i = resultGroup()[0] - 1; i < resultGroup()[1]; i++) {
             output.push(
-                
                 <SingleResult result={searchResults[i]} index={i} key={searchResults[i]._id}/>
             )
         }
@@ -54,9 +51,7 @@ export default function SearchResults(props) {
 
     const handleRightArrowClick = () => {
         scrollToTop()
-        
         if (resultGrouping.currentGroup === resultGrouping.groups) return
-        
         setResultGrouping(prev => {
             return {
                 ...prev,
@@ -64,7 +59,13 @@ export default function SearchResults(props) {
             }
         })
     }
-        
+
+    const arrowsNavigation = resultGrouping.groups > 1 ? 
+        <span id="resultPageNavIcons">
+            <span id="leftArrow" className="arrowIcon" onClick={handleLeftArrowClick}>{leftArrow}</span>
+            <span id="rightArrow" className="arrowIcon" onClick={handleRightArrowClick}>{rightArrow}</span>
+        </span>:
+        null   
 
     return (
         <div>
@@ -74,16 +75,11 @@ export default function SearchResults(props) {
                     "Showing results " + resultGroup()[0] + "-" + resultGroup()[1] + " of " + searchResults.length
                 }
             </h3>
+            {arrowsNavigation}
             <div className="d-flex flex-wrap">
                 {resultsOutput}
             </div>
-            {resultGrouping.groups > 1 ? 
-                <span id="resultPageNavIcons">
-                    <span id="leftArrow" className="arrowIcon" onClick={handleLeftArrowClick}>{leftArrow}</span>
-                    <span id="rightArrow" className="arrowIcon" onClick={handleRightArrowClick}>{rightArrow}</span>
-                </span>:
-                null            
-            }
+            {arrowsNavigation}
         </div>
     )
 }
