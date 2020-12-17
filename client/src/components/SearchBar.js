@@ -51,7 +51,7 @@ export default function SearchBar(props) {
                     />
                     {/* <button className="btn btn-primary">Search</button> */}
                 </div>
-                or
+                <span className="d-flex justify-content-center">or</span>
                 <div className="d-flex">
                     <input 
                         id="zipcode"
@@ -65,7 +65,12 @@ export default function SearchBar(props) {
 
                 </div>
                     <div className="zipcodeSlideContainer">
-                        <label>Search Radius: {zipcodeRadius}mi</label>
+                        <label 
+                            id="searchRadiusText"
+                            style={zipcode === "" ? {"color": "lightgrey"}: {"color": "black"}}
+                        >   
+                            Search Radius: {zipcodeRadius} mi
+                        </label>
                         <input 
                             id="zipcodeRadius"
                             className="slider" 

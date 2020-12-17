@@ -11,10 +11,14 @@ export default function SearchFilters(props) {
     const [ filterToggles, setFilterToggles ] = useState({price: false, sqft: false, bedBath: false})
 
     const handleFilterToggle = (e) => {
+        
+        const selectedToggleElement = document.getElementById(e.target.id)
+        const isCollapsed = selectedToggleElement.classList.contains('collapsed')
+
         setFilterToggles(prev => {
             return {
                 ...prev,
-                [e.target.id]: !prev[e.target.id]
+                [e.target.id]: !isCollapsed
             }
         })
     }
@@ -46,7 +50,7 @@ export default function SearchFilters(props) {
                 <span className="toggleFilter">
                     <button 
                         id="price"
-                        className="btn btn-light shadow-none" 
+                        className="btn btn-light shadow-none " 
                         type="button" 
                         data-bs-toggle="collapse" 
                         data-bs-target="#collapsePriceFilter" 
@@ -62,7 +66,7 @@ export default function SearchFilters(props) {
             <div className="collapse" id="collapsePriceFilter">
                 <input 
                     id="priceInputMin" 
-                    className="priceInput filterInput" 
+                    className="priceInput filterInput form-control mr-sm-2" 
                     value={priceInputMin === "" ? "": numeral(priceInputMin).format('$0,0')} 
                     type="text" 
                     placeholder="Min" 
@@ -70,7 +74,7 @@ export default function SearchFilters(props) {
                 /> {` - `}
                 <input 
                     id="priceInputMax" 
-                    className="priceInput filterInput" 
+                    className="priceInput filterInput form-control mr-sm-2" 
                     value={priceInputMax === "" ? "": numeral(priceInputMax).format('$0,0')} 
                     type="text" 
                     placeholder="Max" 
@@ -97,7 +101,7 @@ export default function SearchFilters(props) {
             <div className="collapse" id="collapseSqftFilter">
                 <input 
                     id="sqftInputMin" 
-                    className="sqftInput filterInput" 
+                    className="sqftInput filterInput form-control mr-sm-2" 
                     value={sqftInputMin === "" ? "": numeral(sqftInputMin).format('0,0')} 
                     type="text" 
                     placeholder="Min" 
@@ -105,7 +109,7 @@ export default function SearchFilters(props) {
                     {` - `}
                 <input 
                     id="sqftInputMax" 
-                    className="sqftInput filterInput" 
+                    className="sqftInput filterInput form-control mr-sm-2" 
                     value={sqftInputMax === "" ? "": numeral(sqftInputMax).format('0,0')} 
                     type="text" 
                     placeholder="Max" 
