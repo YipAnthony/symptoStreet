@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import numeral from 'numeral'
+
+import { downArrow, upArrow } from '../icons/icons'
 
 export default function SearchFilters(props) {
 
     const { searchFilters, setSearchFilters } = props
     const { priceInputMin, priceInputMax, sqftInputMin, sqftInputMax, bedsInput, bathsInput } = searchFilters
+
+    const [ filterToggles, setFilterToggles ] = useState({price: false, sqft: false, bedBath: false})
+
+    const handleFilterToggle = (e) => {
+        setFilterToggles(prev => {
+            return {
+                ...prev,
+                [e.target.id]: !prev[e.target.id]
+            }
+        })
+    }
 
     const handleChange = (e) => {
         const input = e.target.value
@@ -21,10 +34,7 @@ export default function SearchFilters(props) {
                 }
             })
         }
-
     }
-
-    // zipcoderadius
 
     return (
         <form id="searchFilterContainer" className="" autoComplete="off">
@@ -33,29 +43,34 @@ export default function SearchFilters(props) {
             <hr/>
 
             <p id="priceFilter">
-                <button 
-                    className="btn btn-light shadow-none" 
-                    type="button" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target="#collapsePriceFilter" 
-                    aria-expanded="false" 
-                    aria-controls="collapsePriceFilter"
-                >
-                    Price
-                </button>
+                <span className="toggleFilter">
+                    <button 
+                        id="price"
+                        className="btn btn-light shadow-none" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#collapsePriceFilter" 
+                        aria-expanded="false" 
+                        aria-controls="collapsePriceFilter"
+                        onClick={handleFilterToggle}
+                        >
+                        {filterToggles.price ? upArrow: downArrow}
+                        <span className="toggleText">Price</span>
+                    </button>
+                </span>
             </p>
             <div className="collapse" id="collapsePriceFilter">
                 <input 
                     id="priceInputMin" 
-                    className="priceInput" 
+                    className="priceInput filterInput" 
                     value={priceInputMin === "" ? "": numeral(priceInputMin).format('$0,0')} 
                     type="text" 
                     placeholder="Min" 
                     onChange={handleChange}
-                /> to
+                /> {` - `}
                 <input 
                     id="priceInputMax" 
-                    className="priceInput" 
+                    className="priceInput filterInput" 
                     value={priceInputMax === "" ? "": numeral(priceInputMax).format('$0,0')} 
                     type="text" 
                     placeholder="Max" 
@@ -66,27 +81,31 @@ export default function SearchFilters(props) {
 
             <p id="sqftFilter">
                 <button 
+                    id="sqft"
                     className="btn btn-light shadow-none" 
                     type="button" 
                     data-bs-toggle="collapse" 
                     data-bs-target="#collapseSqftFilter" 
                     aria-expanded="false" 
                     aria-controls="collapseSqftFilter"
+                    onClick={handleFilterToggle}
                 >
-                    Square Feet
+                    {filterToggles.sqft ? upArrow: downArrow}
+                    <span className="toggleText">Square Feet</span>
                 </button>
             </p>
             <div className="collapse" id="collapseSqftFilter">
                 <input 
                     id="sqftInputMin" 
-                    className="sqftInput" 
+                    className="sqftInput filterInput" 
                     value={sqftInputMin === "" ? "": numeral(sqftInputMin).format('0,0')} 
                     type="text" 
                     placeholder="Min" 
-                    onChange={handleChange}/> to
+                    onChange={handleChange}/> 
+                    {` - `}
                 <input 
                     id="sqftInputMax" 
-                    className="sqftInput" 
+                    className="sqftInput filterInput" 
                     value={sqftInputMax === "" ? "": numeral(sqftInputMax).format('0,0')} 
                     type="text" 
                     placeholder="Max" 
@@ -96,14 +115,17 @@ export default function SearchFilters(props) {
 
             <p id="bedsBathFilter">
                 <button 
+                    id="bedBath"
                     className="btn btn-light shadow-none" 
                     type="button" 
                     data-bs-toggle="collapse" 
                     data-bs-target="#collapseBedsBathFilter" 
                     aria-expanded="false" 
                     aria-controls="collapseBedsBathFilter"
+                    onClick={handleFilterToggle}
                 >
-                    Bed & Baths
+                    {filterToggles.bedBath ? upArrow: downArrow}
+                    <span className="toggleText">Bed & Bath</span>
                 </button>
             </p>
             <div className="collapse" id="collapseBedsBathFilter">

@@ -16,19 +16,34 @@ code {
     monospace;
 }
 
+#mainContent {
+  margin: 10px;
+}
+
+/* Search Container */
+
 hr {
   margin: 0 !important;
   color: #eeeeef;
   height: 3px !important;
 }
-
-#mainContent {
-  margin: 10px;
+#priceFilter, #sqftFilter, #bedsBathFilter {
+  margin-bottom: 0;
 }
 
-/* #searchFilterContainer {
-  max-width: 300px;
-} */
+#collapsePriceFilter, #collapseSqftFilter {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.btn-light {
+  width: 100% !important;
+  text-align: left;
+}
+
+.toggleText {
+  margin-left: 10px;
+}
 
 #filterContainerTitle {
   font-size: 20px;
