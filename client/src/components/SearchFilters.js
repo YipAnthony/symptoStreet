@@ -10,9 +10,24 @@ export default function SearchFilters(props) {
 
     const [ filterToggles, setFilterToggles ] = useState({price: false, sqft: false, bedBath: false})
 
+    const clearFilters = (e) => {
+        e.preventDefault()
+
+        setSearchFilters({
+            priceInputMin: "",
+            priceInputMax: "",
+            sqftInputMin: "",
+            sqftInputMax: "",
+            bedsInput: "",
+            bathsInput: "",
+        })
+        
+    }
+
     const handleFilterToggle = (e) => {
         
         const selectedToggleElement = document.getElementById(e.target.id)
+        
         const isCollapsed = selectedToggleElement.classList.contains('collapsed')
 
         setFilterToggles(prev => {
@@ -43,7 +58,9 @@ export default function SearchFilters(props) {
     return (
         <form id="searchFilterContainer" className="" autoComplete="off">
             
-            <h3 id="filterContainerTitle">Filter by:</h3>
+            <h3 id="filterContainerTitle">Filter by:
+                <button className="btn btn-secondary btn-sm clearfilters" onClick={clearFilters}>Clear filters</button>
+            </h3> 
             <hr/>
 
             <p id="priceFilter">

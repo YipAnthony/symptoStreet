@@ -29,6 +29,8 @@ function App() {
       bathsInput: "",
     }
   )
+
+  const [ isGoogleAPIOn, setIsGoogleAPIOn ] = useState(false)
   
   const [ searchResults, setSearchResults ] = useState([])
   const [ hasResults, setHasResults ] = useState(true)
@@ -38,16 +40,18 @@ function App() {
     setSearchInput(prev => {
       return {
         ...prev,
-        googleAddress: resultName
+        googleAddress: resultName ? resultName: ""
       }
     })
   }
 
   const submitSearch = async () => {
-    updateAddressStateWithSelection();
     const data = {...searchInput, ...searchFilters}
-    delete data.googleAddress
-    data.zipcode = getZipcodeFromLatLong()
+    // data.googleAddress = ""
+    updateAddressStateWithSelection();
+    if (isGoogleAPIOn) {
+      data.zipcode = getZipcodeFromLatLong()
+    }
     return await postFetch(data)
   }
 
@@ -71,7 +75,7 @@ function App() {
       <div id="mainContent" className="d-flex">
         <section >
           <div id="searchBox" className="card">
-            <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+            <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isGoogleAPIOn={isGoogleAPIOn} setIsGoogleAPIOn={setIsGoogleAPIOn} />
             <SearchFilters searchFilters={searchFilters} setSearchFilters={setSearchFilters} />
             <button className="btn btn-primary" onClick={handleSearch}>Search</button>
           </div>

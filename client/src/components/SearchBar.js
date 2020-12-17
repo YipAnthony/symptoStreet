@@ -4,7 +4,7 @@ export default function SearchBar(props) {
     const { searchInput, setSearchInput } = props
     const { address, googleAddress, zipcode, zipcodeRadius } = searchInput
 
-    const [ isGoogleAPIOn, setIsGoogleAPIOn ] = useState(false)
+    const { isGoogleAPIOn, setIsGoogleAPIOn } = props
     const [ isSearchByAddress, setIsSearchByAddress ] = useState(true)
 
     const handleSearchInput = (e) => {
@@ -75,7 +75,12 @@ export default function SearchBar(props) {
     return (
         <div >
             <h3 id="mainSearchText">Search By:
-                <select id="selectAddressorZipcode" className="form-select form-select-lg d-inline-block shadow-none" value={isSearchByAddress? "Address": "Zipcode"} onChange={handleAddressZipcodeToggle}>
+                <select 
+                    id="selectAddressorZipcode" 
+                    className="form-select form-select-lg d-inline-block shadow-none" 
+                    value={isSearchByAddress? "Address": "Zipcode"} 
+                    onChange={handleAddressZipcodeToggle}
+                >
                     <option value="Address">Address</option>
                     <option value="Zipcode">Zipcode</option>
                 </select>

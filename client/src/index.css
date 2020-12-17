@@ -71,6 +71,12 @@ hr {
   color: #eeeeef;
   height: 3px !important;
 }
+
+.clearfilters {
+  position: absolute;
+  right: 0;
+}
+
 #priceFilter, #sqftFilter, #bedsBathFilter {
   margin-bottom: 0;
 }
@@ -91,9 +97,11 @@ hr {
 }
 
 #filterContainerTitle {
+  position: relative;
   font-size: 20px;
   padding: 5px 0;
   margin: 0;
+  margin-bottom: 5px;
 }
 
 .priceInput, .sqftInput {
