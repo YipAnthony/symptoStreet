@@ -60,12 +60,14 @@ export default function SearchResults(props) {
         })
     }
 
-    const arrowsNavigation = resultGrouping.groups > 1 ? 
+    const arrowsNavigation = (
+        resultGrouping.groups > 1 ? 
         <span id="resultPageNavIcons">
-            <span id="leftArrow" className="arrowIcon" onClick={handleLeftArrowClick}>{leftArrow}</span>
-            <span id="rightArrow" className="arrowIcon" onClick={handleRightArrowClick}>{rightArrow}</span>
-        </span>:
-        null   
+            {resultGrouping.currentGroup === 1 ? null:<button className="btn btn-primary m-2 shadow-none" onClick={handleLeftArrowClick}>Prev Page</button>}
+            {resultGrouping.currentGroup === resultGrouping.groups ? null:<button className="btn btn-primary m-2 shadow-none" onClick={handleRightArrowClick}>Next Page</button>}
+        </span>
+        :null
+    )
 
     return (
         <div>
@@ -76,11 +78,15 @@ export default function SearchResults(props) {
                     "Showing results " + resultGroup()[0] + "-" + resultGroup()[1] + " of " + searchResults.length
                 }
             </h3>
+
             {arrowsNavigation}
+
             <div className="d-flex flex-wrap">
                 {resultsOutput}
             </div>
+            
             {arrowsNavigation}
+
         </div>
     )
 }
