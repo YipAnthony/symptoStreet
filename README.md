@@ -1,4 +1,9 @@
-# symptoStreet
+# [symptoStreet](https://yipanthony.github.io/symptoClient/)
+
+## [Preview Live Version](https://yipanthony.github.io/symptoClient/)
+-  frontend hosted on GitHub pages
+-  backend hosted on Heroku
+
 ## Description: 
 Sympto-street allows users to search from current Redfin housing listings in the San Francisco area (currently only 350 listings in the database).
 
@@ -20,7 +25,6 @@ Users can search listings by either address or zipcode:
 - ### Results
     - Results are presented in groups of 10 per page, and can be sorted by price (low to high, high to low)
         - <img src='./client/public/results.png' width='500px'>
-
 
 
 
