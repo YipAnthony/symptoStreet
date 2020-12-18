@@ -16,6 +16,12 @@ code {
   monospace;
 }
 
+hr {
+  margin: 0 !important;
+  color: #eeeeef;
+  height: 3px !important;
+}
+
 .untargetable {
   pointer-events: none;
 }
@@ -41,6 +47,7 @@ code {
 
 /* Search Address/Zipcodes */
 #searchBox {
+  width: 400px;
   padding: 10px;
 }
 #mainSearchText {
@@ -70,6 +77,9 @@ code {
   top: -2px;
   margin-left: 5px;
 }
+.zipcodeSlideContainer {
+  margin: 5px 1px;
+}
 #zipcodeRadius {
   margin-left: 10px;
   margin-top: 5px;
@@ -77,35 +87,24 @@ code {
 
 
 /* Search Filters */
-hr {
-  margin: 0 !important;
-  color: #eeeeef;
-  height: 3px !important;
-}
 .clearfilters {
   position: absolute;
   right: 0;
 }
-
 #priceFilter, #sqftFilter, #bedsBathFilter {
   margin-bottom: 0;
 }
-
-
 #collapsePriceFilter, #collapseSqftFilter {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 .btn-light {
   width: 100% !important;
   text-align: left;
 }
-
 .toggleText {
   margin-left: 10px;
 }
-
 #filterContainerTitle {
   position: relative;
   font-size: 20px;
@@ -113,43 +112,26 @@ hr {
   margin: 0;
   margin-bottom: 5px;
 }
-
 .priceInput, .sqftInput {
   width: 40%;
   margin-bottom: 5px;
   display: inline-block !important;
 }
-
 .bedbathInput {
   margin-bottom: 5px;
 }
 
-.zipcodeSlideContainer {
-  margin: 5px 1px;
-}
-
-#searchBox {
-  width: 400px;
-}
-
-
-
-
 
 /* Results formatting */
-
 #searchResultsContainer {
   width: 1200px;
   padding: 10px;
 }
-
-
 .priceSort {
   width: 200px;
   display: inline-block;
   margin-left: 10px;
 }
-
 .singleResult {
   margin: 10px;
   border-color: #eeeeef;
@@ -157,7 +139,6 @@ hr {
   height: 360px;
   border-radius: 10px;
 }
-
 .singleResult:hover {
   cursor: pointer;
   border-color: #cfcfcf;
@@ -167,52 +148,27 @@ hr {
   transform: scale(1.01);
   transition-duration: .1s;
 }
-
 .resultImageContainer {
   height: 212px;
   border-bottom: 1px rgba(0, 0, 0, 0.185) solid;
   display: flex;
 }
-
 .houseIcon {
   margin: auto;
   color: rgb(117, 114, 128);
   opacity: .5;
 }
-
 .bedsBathSqftText {
   margin-right: 15px;
 }
-
 .resultContent {
   padding: 10px;
 }
-
 .resultAddress {
   margin-top: 5px;
   font-size: 14px;
 }
-
-
 #resultPageNavIcons {
   display: flex;
   justify-content: center;
-}
-
-.arrowIcon {
-  color: rgb(117, 114, 128);
-  opacity: .8;
-  transition-duration: .1s;
-}
-
-.arrowIcon:hover {
-  cursor: pointer;
-  color: black;
-  opacity: 1;
-  transform: scale(1.1);
-  transition-duration: .1s;
-}
-
-.searchResultIndex {
-  font-size: 24px;
 }
