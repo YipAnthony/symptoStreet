@@ -25,9 +25,7 @@ export default function SearchFilters(props) {
     }
 
     const handleFilterToggle = (e) => {
-        
         const selectedToggleElement = document.getElementById(e.target.id)
-        
         const isCollapsed = selectedToggleElement.classList.contains('collapsed')
 
         setFilterToggles(prev => {
@@ -40,29 +38,27 @@ export default function SearchFilters(props) {
 
     const handleChange = (e) => {
         const input = e.target.value
-
-        // price & sqft input must be type Number
+        
+        // price & sqft input must be Numbers/,/./$
         const priceRegex = /^[$0-9\s][0-9,.\s]*$/
-        const isValidNumber = priceRegex.test(input)
-
-        if (isValidNumber || input === "" || e.target.id === "bathsInput" || e.target.id === "bedsInput") {
-            setSearchFilters(prev => {
-                return {
-                    ...prev,
-                    [e.target.id]: input.replace(/[,$]/g, "")
-                }
-            })
-        }
+        const isValidInput = priceRegex.test(input)
+        
+        if(!isValidInput) return
+        
+        const formattedInput = input.replace(/[,$]/g, "")
+        setSearchFilters(prev => {
+            return {
+                ...prev,
+                [e.target.id]: formattedInput
+            }
+        })
     }
 
     return (
         <form id="searchFilterContainer" className="" autoComplete="off">
-            
             <h3 id="filterContainerTitle">Filter by:
                 <button className="btn btn-secondary btn-sm clearfilters" onClick={clearFilters}>Clear filters</button>
             </h3> 
-            <hr/>
-
             <p id="priceFilter">
                 <span className="toggleFilter">
                     <button 
@@ -98,7 +94,6 @@ export default function SearchFilters(props) {
                     onChange={handleChange}
                 />
             </div>
-            <hr/>
 
             <p id="sqftFilter">
                 <button 
@@ -132,7 +127,6 @@ export default function SearchFilters(props) {
                     placeholder="Max" 
                     onChange={handleChange}/>
             </div>
-            <hr/>
 
             <p id="bedsBathFilter">
                 <button 
@@ -183,7 +177,6 @@ export default function SearchFilters(props) {
                     </div>
                 </div>
             </div>
-            <hr/>
         </form>
     )
 }
