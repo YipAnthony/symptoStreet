@@ -26,60 +26,66 @@ router.post('/', [
     // Extract errors
     const errors = validationResult(req);
     
-    if (errors.isEmpty()) {
-      
-      console.log(req.body.sqftInputMin, typeof req.body.sqftInputMax)
-      const searchQuery = {}
-      // Add the following paramaters to search query if input by user
-
-      if (Number(req.body.zipcode) !== 0) {
-        searchQuery.zipcode = req.body.zipcode
-        
-        // Generate zipcodes within an x mile radius
-        const zipcodesWithinRadius = zipcodes.radius(req.body.zipcode, req.body.zipcodeRadius) 
-
-        if (zipcodesWithinRadius.length > 0) {
-          searchQuery.zipcode = {$in: zipcodesWithinRadius}
-        }
-      } 
-
-      if (Number(req.body.bedsInput) !== 0) {
-        if (Number(req.body.bedsInput[1]) === 0) {
-          searchQuery.beds = {"$gte": req.body.bedsInput[0]}
-        } else {
-          searchQuery.beds = {"$gte": req.body.bedsInput[0], "$lte": req.body.bedsInput[1]}
-        }
-      }
-
-      if (Number(req.body.bathsInput) !== 0) {
-        if (Number(req.body.bathsInput[1] === 0)) {
-          searchQuery.baths = {"$gte": req.body.bathsInput[0]}
-        } else {
-          searchQuery.baths = {"$gte": req.body.bathsInput[0], "$lte": req.body.bathsInput[1]}
-        }
-      }
-      
-      if (Number(req.body.sqftInputMin) !== 0 && Number(req.body.sqftInputMax) !== 0) {
-        searchQuery.sqft = {"$gte": req.body.sqftInputMin, "$lte": req.body.sqftInputMax}
-      } else {
-        if (Number(req.body.sqftInputMin) !== 0) searchQuery.sqft = {"$gte": req.body.sqftInputMin}
-        if (Number(req.body.sqftInputMax) !== 0) searchQuery.sqft = {"$lte": req.body.sqftInputMax}
-      }
-
-      if (Number(req.body.priceInputMin) !== 0 && Number(req.body.priceInputMax) !== 0) {
-        searchQuery.price = {"$gte": req.body.priceInputMin, "$lte": req.body.priceInputMax}
-      } else {
-        if (Number(req.body.priceInputMin) !== 0) searchQuery.price = {"$gte": req.body.priceInputMin}
-        if (Number(req.body.priceInputMax) !== 0) searchQuery.price = {"$lte": req.body.priceInputMax}
-      }
-
-      if (req.body.address !== "") searchQuery.address = {"$regex":req.body.address, "$options": "i"} 
-      
-      // Search MongoDB with user inputted query
-      const searchOutput = await House.find(searchQuery).sort([['price', req.body.priceSort]])
-      console.log(searchQuery)
-      res.json(searchOutput)
+    if (!errors.isEmpty()) {
+      return next(err)
     }
+      
+    const searchQuery = {}
+
+    // Add the following paramaters to search query if input by user
+    if (Number(req.body.zipcode) !== 0) {
+      searchQuery.zipcode = req.body.zipcode
+      
+      // Generate zipcodes within an x mile radius
+      const zipcodesWithinRadius = zipcodes.radius(req.body.zipcode, req.body.zipcodeRadius) 
+
+      if (zipcodesWithinRadius.length > 0) {
+        searchQuery.zipcode = {$in: zipcodesWithinRadius}
+      }
+    } 
+
+    const userBedFilter = req.body.bedsInput
+    if (userBedFilter !== "") {
+      if (userBedFilter === "4") {
+        searchQuery.beds = {"$gte": 4}
+      } else {
+        searchQuery.beds = {"$gte": userBedFilter[0], "$lte": userBedFilter[1]}
+      }
+    }
+    
+    const userBathFilter = req.body.bathsInput
+    if (userBathFilter !== "") {
+      if (userBathFilter === "4") {
+        searchQuery.baths = {"$gte": 4}
+      } else {
+        searchQuery.baths = {"$gte": userBathFilter[0], "$lte": userBathFilter[1]}
+      }
+    }
+    
+    if (!!req.body.sqftInputMin) {
+      searchQuery.sqft = {}
+      searchQuery.sqft["$gte"] = req.body.sqftInputMin
+    }
+    if (!!req.body.sqftInputMax) {
+      if (!searchQuery.sqft) searchQuery.sqft = {}
+      searchQuery.sqft["$lte"] = req.body.sqftInputMax
+    }
+
+    if(!!req.body.priceInputMin) {
+      searchQuery.price = {}
+      searchQuery.price["gte"] = req.body.priceInputMin
+    }
+    if(!!req.body.priceInputMax) {
+      if (!searchQuery.price) searchQuery.price = {}
+      searchQuery.price["gte"] = req.body.priceInputMax
+    }
+
+    if (req.body.address !== "") searchQuery.address = {"$regex":req.body.address, "$options": "i"} 
+    
+    // Search MongoDB with user inputted query
+    const searchOutput = await House.find(searchQuery).sort([['price', req.body.priceSort]])
+    console.log(searchQuery)
+    res.json(searchOutput)
   }
 ]);
 

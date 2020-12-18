@@ -163,7 +163,7 @@ export default function SearchFilters(props) {
                             <option value="">No preference</option>
                             <option value="12">1-2</option>
                             <option value="23">2-3</option>
-                            <option value="40">4+</option>
+                            <option value="4">4+</option>
                         </select>
                     </div>
                     <div className="form-group">
@@ -178,7 +178,7 @@ export default function SearchFilters(props) {
                             <option value="">No preference</option>
                             <option value="12">1-2</option>
                             <option value="23">2-3</option>
-                            <option value="40">4+</option>
+                            <option value="4">4+</option>
                         </select>
                     </div>
                 </div>

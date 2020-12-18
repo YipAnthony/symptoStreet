@@ -1,4 +1,4 @@
-// This file is only to add the redfin houses into my mongoDB cluster
+// I created this just to add the redfin houses into my mongoDB cluster
 const House = require('../models/house')
 
 // read redfin json file
