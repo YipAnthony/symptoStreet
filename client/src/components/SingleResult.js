@@ -2,11 +2,10 @@ import React from 'react'
 import numeral from 'numeral'
 
 import { houseIcon } from '../icons/icons'
-import SearchResults from './SearchResults'
 
 export default function SingleResult(props) {
 
-    const { result, index } = props
+    const { result } = props
 
     const openURL = () => {
         window.open(result.url, '_blank')
@@ -18,7 +17,7 @@ export default function SingleResult(props) {
                 <span className="houseIcon">{houseIcon}</span>
             </div>
             <div className="resultContent">
-                <h3 className="searchResultIndex">  {numeral(result.price).format('$0,0')} </h3>
+                <h3>  {numeral(result.price).format('$0,0')} </h3>
                 <span>
                     <span className="bedsBathSqftText">
                         {result.beds === 0 ? "-": result.beds}
