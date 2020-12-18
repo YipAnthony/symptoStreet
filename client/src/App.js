@@ -41,6 +41,7 @@ function App() {
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false
+      // eslint-disable-next-line
     } else handleSearch()
   }, [searchInput.priceSort])
 
@@ -77,7 +78,7 @@ function App() {
       <div><LogoBar /></div>
       <hr/>
       <div id="mainContent" className="d-flex">
-        <section >
+        <section id="searchBoxContainer" >
           <div id="searchBox" className="card">
             <SearchAddressZipcode 
               searchInput={searchInput} 
@@ -101,6 +102,7 @@ function App() {
             setSearchInput={setSearchInput}
           />
         </section>
+        <div id="backgroundFade"></div>
       </div>
     </div>
   );

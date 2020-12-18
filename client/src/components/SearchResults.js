@@ -120,7 +120,7 @@ export default function SearchResults(props) {
 
             {pageNavigationButtons}
 
-            <div className="d-flex flex-wrap">
+            <div className="d-flex flex-wrap justify-content-center">
                 {resultsOutput}
             </div>
             

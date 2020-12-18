@@ -21,6 +21,9 @@ hr {
 .untargetable {
   pointer-events: none;
 }
+#mediaQueriedSearch {
+  visibility: hidden;
+}
 
 /* <LogoBar /> component */
 #logoBar {
@@ -39,10 +42,16 @@ hr {
 
 #mainContent {
   margin: 10px;
+  position: relative;
 }
 
 /* Search Address/Zipcodes */
+#searchBoxContainer {
+  width: 500px;
+  padding: 10px;
+}
 #searchBox {
+  position: fixed;
   width: 400px;
   padding: 10px;
 }
@@ -123,6 +132,10 @@ hr {
   width: 1200px;
   padding: 10px;
 }
+#searchResultsTitle {
+  display: flex;
+  justify-content: center;
+}
 .priceSort {
   width: 200px;
   display: inline-block;
@@ -167,4 +180,78 @@ hr {
 #resultPageNavIcons {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 1250px) {
+  #searchResultsContainer {
+    width: 100%;
+    margin: 20px;
+  }
+  .singleResult {
+    margin: 10px;
+    border-color: #eeeeef;
+    width: 300px;
+    height: 330px;
+    border-radius: 10px;
+  }
+
+  #searchBoxContainer {
+    position: absolute;
+
+  }
+  #searchBoxContainer[search="on"] {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  #backgroundFade[search="on"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.87);
+  }
+
+  #searchBox {
+    visibility: hidden;
+  }
+
+  #searchBox[search="on"]  {
+    position: relative;
+    visibility: visible;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    margin-top: 10%;
+    z-index: 3;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 18px 0px rgba(0, 0, 0, 0.12); 
+  }
+  
+   #mediaQueriedSearch{
+    visibility: visible;
+    position: absolute;
+    right: 20px;
+   }
+}
+
+@media (max-width: 840px) {
+  #searchResultsContainer {
+    width: 100%;
+    margin: 5px;
+  }
+/* 
+  #searchBoxContainer {
+    display: none;
+  } */
 }
