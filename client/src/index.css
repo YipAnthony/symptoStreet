@@ -5,20 +5,37 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
 
 .untargetable {
   pointer-events: none;
 }
+
+/* <LogoBar /> component */
+#logoBar {
+  margin: 5px;
+  margin-left: 15px;
+  height: 50px;
+}
+#combinedLogo {
+  height: 34px;
+}
+#streetText {
+  font-weight: bold;
+  font-size: 30px;
+  color: var(--symptoPrimaryBlue)
+}
+
+
 #mainContent {
   margin: 10px;
 }
@@ -42,7 +59,6 @@ code {
   margin-left: 5px;
   width: 50%;
 }
-
 
 .form-check-input:focus {
   border-color: none;
@@ -123,22 +139,16 @@ hr {
 }
 
 
-#logoBar {
-  margin: 5px;
-  height: 50px;
-}
 
-#combinedLogo {
-  height: 34px;
-}
 
-#streetText {
-  font-weight: bold;
-  font-size: 30px;
-  color: var(--symptoPrimaryBlue)
-}
 
 /* Results formatting */
+
+#searchResultsContainer {
+  width: 1200px;
+  padding: 10px;
+}
+
 
 .priceSort {
   width: 200px;
@@ -194,13 +204,6 @@ hr {
   display: flex;
   justify-content: center;
 }
-
-#searchResultsContainer {
-  width: 1200px;
-  padding: 10px;
-}
-
-
 
 .arrowIcon {
   color: rgb(117, 114, 128);
