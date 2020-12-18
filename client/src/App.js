@@ -34,6 +34,7 @@ function App() {
   const [ isGoogleAPIOn, setIsGoogleAPIOn ] = useState(false)  
   const [ searchResults, setSearchResults ] = useState([])
   const [ hasResults, setHasResults ] = useState(true)
+  const [ isLoadingResults, setIsLoadingResults ] = useState(false)
 
   const initialRender = useRef(true)
  
@@ -77,8 +78,10 @@ function App() {
 
   const handleSearch = async () => {
     decenterSearch()
+    setIsLoadingResults(true)
     const fetchResults = await submitSearch()
     setSearchResults(fetchResults)
+    setIsLoadingResults(false)
     fetchResults.length === 0 ? setHasResults(false) : setHasResults(true)
   }
 
@@ -110,6 +113,7 @@ function App() {
             hasResults={hasResults} 
             priceSort={searchInput.priceSort}
             setSearchInput={setSearchInput}
+            isLoadingResults={isLoadingResults}
           />
         </section>
         <div id="backgroundFade"></div>

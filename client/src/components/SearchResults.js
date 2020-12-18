@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import SingleResult from './SingleResult'
 
+import loadingLogo from '../icons/circles-menu-1.gif'
+
 export default function SearchResults(props) {
 
-    const { searchResults, hasResults, priceSort, setSearchInput } = props
+    const { searchResults, hasResults, priceSort, setSearchInput, isLoadingResults } = props
 
     const [ resultGrouping, setResultGrouping ] = useState({})
     const [ resultsOutput, setResultsOutput ] = useState([])
@@ -103,6 +105,13 @@ export default function SearchResults(props) {
 
     return (
         <div>
+            {
+                isLoadingResults ? 
+                <div id="loadingResults">
+                    <img src={loadingLogo} alt="Loading logo"></img>
+                </div>
+                : null
+            }
             <h3 id="searchResultsTitle">
                 {!hasResults ? "No results, try broadening your search": null}
                 {
