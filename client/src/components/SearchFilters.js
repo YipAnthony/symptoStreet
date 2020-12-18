@@ -70,7 +70,7 @@ export default function SearchFilters(props) {
                         aria-expanded="false" 
                         aria-controls="collapsePriceFilter"
                         onClick={handleFilterToggle}
-                        >
+                    >
                         {filterToggles.price ? upArrow: downArrow}
                         <span className="toggleText untargetable">Price</span>
                     </button>
@@ -117,15 +117,17 @@ export default function SearchFilters(props) {
                     value={sqftInputMin === "" ? "": numeral(sqftInputMin).format('0,0')} 
                     type="text" 
                     placeholder="Min" 
-                    onChange={handleChange}/> 
-                    {` - `}
+                    onChange={handleChange}
+                /> 
+                {` - `}
                 <input 
                     id="sqftInputMax" 
                     className="sqftInput filterInput form-control mr-sm-2" 
                     value={sqftInputMax === "" ? "": numeral(sqftInputMax).format('0,0')} 
                     type="text" 
                     placeholder="Max" 
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                />
             </div>
 
             <p id="bedsBathFilter">
