@@ -31,14 +31,20 @@ function App() {
     }
   )
 
-  const [ isGoogleAPIOn, setIsGoogleAPIOn ] = useState(false)
-  
+  const [ isGoogleAPIOn, setIsGoogleAPIOn ] = useState(false)  
   const [ searchResults, setSearchResults ] = useState([])
   const [ hasResults, setHasResults ] = useState(true)
 
   const initialRender = useRef(true)
+  
+  // Resort results via price
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false
+    } else handleSearch()
+  }, [searchInput.priceSort])
 
-  const updateAddressStateWithSelection = () => {
+  const retrieveGoogleAddressNameAndUpdateState = () => {
     const resultName = document.getElementById('googleAddress').getAttribute('resultName')
     setSearchInput(prev => {
       return {
@@ -50,33 +56,21 @@ function App() {
 
   const submitSearch = async () => {
     const data = {...searchInput, ...searchFilters}
-    // data.googleAddress = ""
-    updateAddressStateWithSelection();
+    retrieveGoogleAddressNameAndUpdateState();
+
     if (isGoogleAPIOn) {
       data.zipcode = getZipcodeFromLatLong()
     }
+
     return await postFetch(data)
   }
 
   const handleSearch = async () => {
-
     const fetchResults = await submitSearch()
-    
-    // Update searchResults state
     setSearchResults(fetchResults)
-    if (fetchResults.length === 0) {
-      setHasResults(false)
-    } else {
-      setHasResults(true)
-    }
+    fetchResults.length === 0 ? setHasResults(false) : setHasResults(true)
   }
 
-  // Rerun results if sort changed
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false
-    } else handleSearch()
-  }, [searchInput.priceSort])
       
   return (
     <div className="App">
@@ -85,8 +79,16 @@ function App() {
       <div id="mainContent" className="d-flex">
         <section >
           <div id="searchBox" className="card">
-            <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isGoogleAPIOn={isGoogleAPIOn} setIsGoogleAPIOn={setIsGoogleAPIOn} />
-            <SearchFilters searchFilters={searchFilters} setSearchFilters={setSearchFilters} />
+            <SearchBar 
+              searchInput={searchInput} 
+              setSearchInput={setSearchInput} 
+              isGoogleAPIOn={isGoogleAPIOn} 
+              setIsGoogleAPIOn={setIsGoogleAPIOn} 
+            />
+            <SearchFilters 
+              searchFilters={searchFilters} 
+              setSearchFilters={setSearchFilters} 
+            />
             <button className="btn btn-primary" onClick={handleSearch}>Search</button>
           </div>
         </section>
