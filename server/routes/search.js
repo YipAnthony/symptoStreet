@@ -73,11 +73,11 @@ router.post('/', [
 
       if(!!req.body.priceInputMin) {
         searchQuery.price = {}
-        searchQuery.price["gte"] = req.body.priceInputMin
+        searchQuery.price["$gte"] = req.body.priceInputMin
       }
       if(!!req.body.priceInputMax) {
         if (!searchQuery.price) searchQuery.price = {}
-        searchQuery.price["gte"] = req.body.priceInputMax
+        searchQuery.price["$lte"] = req.body.priceInputMax
       }
 
       if (req.body.address !== "") searchQuery.address = {"$regex":req.body.address, "$options": "i"} 
