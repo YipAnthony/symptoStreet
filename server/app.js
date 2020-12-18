@@ -1,25 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var cors = require('cors')
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const cors = require('cors')
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var searchRouter = require('./routes/search');
+const indexRouter = require('./routes/index');
+const searchRouter = require('./routes/search');
 
-var app = express();
+const app = express();
 
 // Setup mongoose connection
 const mongoose = require('mongoose')
 const mongoDB = 'mongodb+srv://Testuser1:123123123@cluster0.tbbjq.mongodb.net/symptoStreet?retryWrites=true&w=majority'
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 app.use(cors())
 app.use(logger('dev'));
