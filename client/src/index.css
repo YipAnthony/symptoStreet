@@ -139,6 +139,13 @@ hr {
 }
 
 /* Results formatting */
+
+.priceSort {
+  width: 200px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
 .singleResult {
   margin: 10px;
   border-color: #eeeeef;

@@ -75,9 +75,9 @@ router.post('/', [
 
       if (req.body.address !== "") searchQuery.address = {"$regex":req.body.address, "$options": "i"} 
       
-      console.log(searchQuery)
       // Search MongoDB with user inputted query
       const searchOutput = await House.find(searchQuery).sort([['price', req.body.priceSort]])
+      console.log(searchQuery)
       res.json(searchOutput)
     }
   }

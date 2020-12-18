@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef } from 'react'
 
 import LogoBar from './components/LogoBar'
 import SearchBar from './components/SearchBar'
@@ -16,6 +16,7 @@ function App() {
       googleAddress: "",
       zipcode: "",
       zipcodeRadius: "3",
+      priceSort: "ascending"
     }
   )
 
@@ -34,6 +35,8 @@ function App() {
   
   const [ searchResults, setSearchResults ] = useState([])
   const [ hasResults, setHasResults ] = useState(true)
+
+  const initialRender = useRef(true)
 
   const updateAddressStateWithSelection = () => {
     const resultName = document.getElementById('googleAddress').getAttribute('resultName')
@@ -67,6 +70,13 @@ function App() {
       setHasResults(true)
     }
   }
+
+  // Rerun results if sort changed
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false
+    } else handleSearch()
+  }, [searchInput.priceSort])
       
   return (
     <div className="App">
@@ -81,7 +91,13 @@ function App() {
           </div>
         </section>
         <section id="searchResultsContainer">
-          <SearchResults searchResults={searchResults} setSearchResults={setSearchResults} hasResults={hasResults} />
+          <SearchResults 
+            searchResults={searchResults} 
+            setSearchResults={setSearchResults} 
+            hasResults={hasResults} 
+            priceSort={searchInput.priceSort}
+            setSearchInput={setSearchInput}
+          />
         </section>
       </div>
     </div>

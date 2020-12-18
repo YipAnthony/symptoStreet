@@ -4,11 +4,22 @@ import { leftArrow, rightArrow } from '../icons/icons'
 
 export default function SearchResults(props) {
 
-    const { searchResults, setSearchResults, hasResults } = props
+    const { searchResults, setSearchResults, hasResults, priceSort, setSearchInput } = props
 
     const [ resultGrouping, setResultGrouping ] = useState({groups: Number, currentGroup: 1})
     const [ resultsOutput, setResultsOutput ] = useState([])
     
+    const handlePriceSort = (e) => {
+        const userSelection = e.target.value
+        setSearchInput(prev => {
+            return {
+                ...prev,
+                priceSort: userSelection
+            }
+        })
+    }
+
+
     // Determine number of result groups
     useEffect(() => {
         const numberOfGroups = Math.round(searchResults.length/10)
@@ -76,6 +87,12 @@ export default function SearchResults(props) {
                 {searchResults.length === 0 ? 
                     null:
                     "Showing results " + resultGroup()[0] + "-" + resultGroup()[1] + " of " + searchResults.length
+                }
+                {searchResults.length > 1 ? 
+                    <select className="priceSort form-select shadow-none" value={priceSort} onChange={handlePriceSort}>
+                        <option value="ascending">Price: Low to High</option>
+                        <option value="descending">Price: High to Low</option>
+                    </select>: null
                 }
             </h3>
 
