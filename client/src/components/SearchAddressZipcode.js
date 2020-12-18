@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-export default function SearchBar(props) {
-    const { searchInput, setSearchInput } = props
+export default function SearchAddressZipcode(props) {
+    const { searchInput, setSearchInput, isGoogleAPIOn, setIsGoogleAPIOn } = props
     const { address, googleAddress, zipcode, zipcodeRadius } = searchInput
 
-    const { isGoogleAPIOn, setIsGoogleAPIOn } = props
     const [ isSearchByAddress, setIsSearchByAddress ] = useState(true)
 
     const handleSearchInput = (e) => {
@@ -13,10 +12,7 @@ export default function SearchBar(props) {
         // Test if zipcode is type Number
         const numberRegex = /^[0-9]*$/
         const isZipcodeANumber = numberRegex.test(userInput)
-
-        if (e.target.id === "zipcode" && !isZipcodeANumber) {
-            return
-        }
+        if (e.target.id === "zipcode" && !isZipcodeANumber) return
 
         // Set address/zipcode state
         setSearchInput(prev => {
@@ -27,50 +23,38 @@ export default function SearchBar(props) {
         })
     }
 
-    const handleGoogleAPIToggle = () => {
-        setIsGoogleAPIOn(prev => !prev)
+    const resetSearchInputs = () => {
         setSearchInput(prev => {
             return {
                 ...prev,
                 address: "",
-                googleAddress: ""
+                googleAddress: "",
+                zipcode: ""
             }
         })
     }
 
+    const handleGoogleAPIToggle = () => {
+        setIsGoogleAPIOn(prev => !prev)
+        resetSearchInputs()
+    }
+
     const handleAddressZipcodeToggle = () => {
-        // Delete address/zipcode value when toggling
-        if (isSearchByAddress) {
-            setSearchInput(prev => {
-                return {
-                    ...prev,
-                    address: "",
-                    googleAddress: ""
-                }
-            })
-        } else {
-            setSearchInput(prev => {
-                return {
-                    ...prev,
-                    zipcode: ""
-                }
-            })
-        }
         setIsSearchByAddress(prev => !prev)
+        resetSearchInputs()
     }
 
     // Toggle disable attribute for zipcode radius slider
     useEffect(() => {
         if (isSearchByAddress) return
 
-        const zipcodeRadiusElement = document.getElementById('zipcodeRadius')
-
+        const zipcodeSlider = document.getElementById('zipcodeRadius')
         if (zipcode !== "") {
-            zipcodeRadiusElement.removeAttribute("disabled")
+            zipcodeSlider.removeAttribute("disabled")
         } else {
-            zipcodeRadiusElement.setAttribute("disabled", "")
+            zipcodeSlider.setAttribute("disabled", "")
         }
-    }, [zipcode])
+    }, [zipcode, isSearchByAddress])
 
     return (
         <div >
@@ -85,7 +69,6 @@ export default function SearchBar(props) {
                     <option value="Zipcode">Zipcode</option>
                 </select>
             </h3>
-
             <form id="searchAddressZipcodeContainer" autoComplete="off">
                 <div className="addressOrZipcode">
                     <div id="addressSearchContainer">
@@ -112,16 +95,23 @@ export default function SearchBar(props) {
                             />
                         </div>
                     }
-
                     </div>
-                    
+
                     {isSearchByAddress ? 
                     <div className="form-check form-switch mt-2">
-                        <input className="form-check-input" checked={isGoogleAPIOn} onChange={handleGoogleAPIToggle} type="checkbox" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label">{isGoogleAPIOn ? "Google Search API On": "Google Search API Off"}</label>
+                        <input 
+                            className="form-check-input" 
+                            checked={isGoogleAPIOn} 
+                            onChange={handleGoogleAPIToggle} 
+                            type="checkbox" 
+                            id="flexSwitchCheckDefault" 
+                        />
+                        <label className="form-check-label">
+                            {isGoogleAPIOn ? "Google Search API On": "Google Search API Off"}
+                        </label>
                     </div>:null}
-
                 </div>
+
                 {isSearchByAddress ? null:
                     <div className="addressOrZipcode">
                         <div className="d-flex">
@@ -132,31 +122,30 @@ export default function SearchBar(props) {
                                 placeholder="Search by zipcode"
                                 value={zipcode}
                                 onChange={handleSearchInput}
-                                />
-
+                            />
                         </div>
-                            <div className="zipcodeSlideContainer">
-                                <label 
-                                    id="searchRadiusText"
-                                    style={zipcode === "" ? {"color": "lightgrey"}: {"color": "black"}}
-                                    >   
-                                    Search Radius: {zipcodeRadius} mi
-                                </label>
-                                <input 
-                                    id="zipcodeRadius"
-                                    className="slider" 
-                                    type="range" 
-                                    min="1" 
-                                    max="5" 
-                                    disabled 
-                                    value={zipcodeRadius} 
-                                    onChange={handleSearchInput} 
-                                    />
-                            </div>
+
+                        <div className="zipcodeSlideContainer">
+                            <label 
+                                id="searchRadiusText"
+                                style={zipcode === "" ? {"color": "lightgrey"}: {"color": "black"}}
+                            >   
+                                Search Radius: {zipcodeRadius} mi
+                            </label>
+                            <input 
+                                id="zipcodeRadius"
+                                className="slider" 
+                                type="range" 
+                                min="1" 
+                                max="5" 
+                                disabled 
+                                value={zipcodeRadius} 
+                                onChange={handleSearchInput} 
+                            />
+                        </div>
                     </div>    
                 }
-            </form>
-            
+            </form> 
         </div>
     )
 }

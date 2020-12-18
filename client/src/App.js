@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef } from 'react'
 
 import LogoBar from './components/LogoBar'
-import SearchBar from './components/SearchBar'
+import SearchAddressZipcode from './components/SearchAddressZipcode'
 import SearchFilters from './components/SearchFilters'
 import SearchResults from './components/SearchResults'
 
@@ -79,7 +79,7 @@ function App() {
       <div id="mainContent" className="d-flex">
         <section >
           <div id="searchBox" className="card">
-            <SearchBar 
+            <SearchAddressZipcode 
               searchInput={searchInput} 
               setSearchInput={setSearchInput} 
               isGoogleAPIOn={isGoogleAPIOn} 

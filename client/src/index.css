@@ -35,59 +35,53 @@ code {
   color: var(--symptoPrimaryBlue)
 }
 
-
 #mainContent {
   margin: 10px;
 }
 
-/* Search Container */
+/* Search Address/Zipcodes */
 #searchBox {
   padding: 10px;
 }
-
+#mainSearchText {
+  display: inline-block;
+  width: 100%;
+}
 #searchAddressZipcodeContainer, #addressSearchContainer {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
-
-#mainSearchText {
-  display: inline-block;
-  width: 100%;
-}
 #selectAddressorZipcode {
   margin-left: 5px;
   width: 50%;
 }
-
+#googleAddress, #address, .addressOrZipcode {
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
 .form-check-input:focus {
   border-color: none;
   outline: 0;
   box-shadow: none;
 }
-
 .form-switch {
   position: relative;
   top: -2px;
   margin-left: 5px;
 }
-
-#googleAddress, #address, .addressOrZipcode {
-  grid-row: 1/2;
-  grid-column: 1/2;
-}
-
 #zipcodeRadius {
   margin-left: 10px;
   margin-top: 5px;
 }
 
+
+/* Search Filters */
 hr {
   margin: 0 !important;
   color: #eeeeef;
   height: 3px !important;
 }
-
 .clearfilters {
   position: absolute;
   right: 0;
