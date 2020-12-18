@@ -1,6 +1,6 @@
-# [symptoStreet](https://yipanthony.github.io/symptoClient/)
+# [symptoStreet](https://yipanthony.github.io/symptoFrontEnd/)
 
-## [Preview Live Version](https://yipanthony.github.io/symptoClient/)
+## [Preview Live Version](https://yipanthony.github.io/symptoFrontEnd/)
 -  frontend hosted on GitHub pages
 -  backend hosted on Heroku
 

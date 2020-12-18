@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import SingleResult from './SingleResult'
 
-import loadingLogo from '../icons/circles-menu-1.gif'
+import loadingLogo from '../images/symptoIcon.jpeg'
 
 export default function SearchResults(props) {
 
