@@ -36,14 +36,23 @@ function App() {
   const [ hasResults, setHasResults ] = useState(true)
 
   const initialRender = useRef(true)
-  
+ 
   // Resort results via price
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false
-      // eslint-disable-next-line
     } else handleSearch()
+    // eslint-disable-next-line
   }, [searchInput.priceSort])
+  
+  const decenterSearch = () => {
+    const searchBox = document.getElementById('searchBox')
+    const searchBoxContainer = document.getElementById('searchBoxContainer')
+    const backgroundFade = document.getElementById('backgroundFade')
+    searchBox.removeAttribute('search')
+    searchBoxContainer.removeAttribute('search')
+    backgroundFade.removeAttribute('search')
+  }
 
   const retrieveGoogleAddressNameAndUpdateState = () => {
     const resultName = document.getElementById('googleAddress').getAttribute('resultName')
@@ -67,6 +76,7 @@ function App() {
   }
 
   const handleSearch = async () => {
+    decenterSearch()
     const fetchResults = await submitSearch()
     setSearchResults(fetchResults)
     fetchResults.length === 0 ? setHasResults(false) : setHasResults(true)
@@ -78,8 +88,8 @@ function App() {
       <div><LogoBar /></div>
       <hr/>
       <div id="mainContent" className="d-flex">
-        <section id="searchBoxContainer" >
-          <div id="searchBox" className="card">
+        <section id="searchBoxContainer" search="on" >
+          <div id="searchBox" className="card" search="on">
             <SearchAddressZipcode 
               searchInput={searchInput} 
               setSearchInput={setSearchInput} 

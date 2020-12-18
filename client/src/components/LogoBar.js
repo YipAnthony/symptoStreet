@@ -5,8 +5,8 @@ export default function LogoBar() {
     const handleSearch = () => {
         
         const searchBox = document.getElementById('searchBox')
-        const backgroundFade = document.getElementById('backgroundFade')
         const searchBoxContainer = document.getElementById('searchBoxContainer')
+        const backgroundFade = document.getElementById('backgroundFade')
 
         searchBox.setAttribute('search', 'on')
         backgroundFade.setAttribute('search', 'on')
