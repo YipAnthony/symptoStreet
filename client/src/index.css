@@ -213,6 +213,9 @@ hr {
   border-bottom: 1px rgba(0, 0, 0, 0.185) solid;
   display: flex;
 }
+.houseImg {
+  width: 100%;
+}
 .houseIcon {
   margin: auto;
   color: rgb(117, 114, 128);

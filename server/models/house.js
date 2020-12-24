@@ -15,6 +15,7 @@ const houseSchema = new Schema(
         yearBuilt: {type: Number},
         dollarPerSqft: {type: Number},
         url: {type: String},
+        imageURL: {type: String},
         latitude: {type: Number},
         longitude: {type: Number},
     }

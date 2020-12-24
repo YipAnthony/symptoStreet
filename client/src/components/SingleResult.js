@@ -14,7 +14,11 @@ export default function SingleResult(props) {
     return (
         <div className="card singleResult" onClick={openURL}>
             <div className="resultImageContainer">
-                <span className="houseIcon">{houseIcon}</span>
+                {
+                    !!result.imageURL ? 
+                    <img className="houseImg" src={result.imageURL}></img>:
+                    <span className="houseIcon">{houseIcon}</span> 
+                }
             </div>
             <div className="resultContent">
                 <h3>  {numeral(result.price).format('$0,0')} </h3>

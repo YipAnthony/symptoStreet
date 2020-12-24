@@ -13,10 +13,19 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+// import image scraper
+const { getData } = require('./scraper')
 
 let houses = []
 
-function houseCreate(houseObject) {
+// Add image source to loaded redfinHouses object
+// async function addImageSrc (url) {
+//     return await getData(url)
+//     console.log(srcURL)
+//     return srcURL
+// }
+
+async function houseCreate(houseObject) {
 
   let house = new House(
     {
@@ -32,6 +41,7 @@ function houseCreate(houseObject) {
       yearBuilt: Number(houseObject.yearBuilt),
       dollarPerSqft: Number(houseObject.dollarPerSqft),
       url: houseObject.url,
+      imageURL: houseObject.imageURL,
       latitude: Number(houseObject.latitude),
       longitude: Number(houseObject.longitude)
     }
@@ -42,14 +52,35 @@ function houseCreate(houseObject) {
       return console.log(err)
     }
   
-    console.log('New House:' + houseObject.address)
+    console.log('New House:' + houseObject.address + ' ImgSrc:' + houseObject.imageURL)
     houses.push(house)
   })
 }
 
-for (const house in redfinHouses) {
-  if (redfinHouses.hasOwnProperty(house)) {
-    houseCreate(redfinHouses[house])
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}  
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+async function addToMongoDB() {
+  await sleep(10000)
+  for (const house in redfinHouses) {
+    if (redfinHouses.hasOwnProperty(house)) {
+      console.log(redfinHouses[house].url)
+      const src = await getData(redfinHouses[house].url)
+      console.log(src)
+      redfinHouses[house].imageURL = src
+      const randomDelay = getRandomInt(10) * 1000  + 30000//random delay, 30 seconds + 1-10 seconds
+      await(sleep(randomDelay))
+      console.log(redfinHouses[house].imageURL)
+      await houseCreate(redfinHouses[house])
+    }
   }
 }
 
+addToMongoDB();
